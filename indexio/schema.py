@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Any
+from typing import Dict, Any, List
 from fields import Field, Text, Number
 from consts import TEXT_TYPE, NUMBER_TYPE
 
@@ -39,10 +39,8 @@ class SchemaJSON(Schema):
             raise Exception('Unable to load json data')
         return data
     
-    def _create_fields(self, raw_data:Dict[str,Any]):
-        fields = []
-        for key, value in raw_data.items():
-            self._type_handling(key, value)
+    def _create_fields(self, raw_data:Dict[str,Any]) -> List[Field]:
+        return [self._type_handling(key, value) for key, value in raw_data.items()]
     
     def _type_handling(self, key:str, value:Any):
         if type(value) is str:
