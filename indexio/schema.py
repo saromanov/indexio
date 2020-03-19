@@ -9,6 +9,9 @@ class UnknownTypeException(Exception):
 class NotFoundTypeException(Exception):
     pass
 
+class UnknownFieldTypeException(Exception):
+    pass
+
 class Schema:
     '''
     basic class for schema
@@ -52,7 +55,7 @@ class SchemaJSON(Schema):
             return field_init(key, \
                 sorted=value.get('sorted'), \
                 unique=value.get('unique'))
-        print(field_init)
+        raise UnknownFieldTypeException(f'type {value} is unknown')
             
 
     def _get_type_of_field(self, value:Any) -> Field:
