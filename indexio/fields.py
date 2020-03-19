@@ -7,9 +7,8 @@ class Field:
 
 
 class Text(Field):
-    def __init__(self, name:str, value:str, *args, **kwargs):
+    def __init__(self, name:str, *args, **kwargs):
         self._name = name
-        self._value
         super(Text, self).__init__()
 
 class Number(Field):

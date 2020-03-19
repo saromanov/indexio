@@ -42,15 +42,18 @@ class SchemaJSON(Schema):
     def _create_fields(self, raw_data:Dict[str,Any]):
         fields = []
         for key, value in raw_data.items():
-            self._type_handling(value)
+            self._type_handling(key, value)
     
-    def _type_handling(self, value:Any):
+    def _type_handling(self, key:str, value:Any):
         if type(value) is str:
-           field_init = self._get_type_of_field(value)
+           return self._get_type_of_field(value)(name=key)
         if type(value) is dict:
             if 'type' not in value:
                 raise NotFoundTypeException(f'type is not defined at {value}')
             field_init = self._get_type_of_field(value['type'])
+            return field_init(name=name, \
+                sorted=value.get('sorted'), \
+                unique=value.get('unique'))
         print(field_init)
             
 
