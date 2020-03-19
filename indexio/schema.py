@@ -46,12 +46,12 @@ class SchemaJSON(Schema):
     
     def _type_handling(self, key:str, value:Any):
         if type(value) is str:
-           return self._get_type_of_field(value)(name=key)
+           return self._get_type_of_field(value)(key)
         if type(value) is dict:
             if 'type' not in value:
                 raise NotFoundTypeException(f'type is not defined at {value}')
             field_init = self._get_type_of_field(value['type'])
-            return field_init(name=name, \
+            return field_init(key, \
                 sorted=value.get('sorted'), \
                 unique=value.get('unique'))
         print(field_init)

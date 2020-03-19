@@ -12,5 +12,5 @@ class Text(Field):
         super(Text, self).__init__()
 
 class Number(Field):
-    def __init__(self, name:str, value, *args, **kwargs):
+    def __init__(self, name:str, *args, **kwargs):
         super(Number, self).__init__()
