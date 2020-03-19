@@ -1,7 +1,30 @@
+import json
 
-class Schema:
-    def __init__(self, text):
+class SchemaBasic:
+    '''
+    basic class for schema
+    '''
+    def __init__(self):
+        pass
+
+class SchemaJSON(SchemaBasic):
+    '''
+    definition of the schema on JSON format
+    it can be defined as
+    {
+        "data":"text",
+        "content":"text"
+    }
+    '''
+    def __init__(self, definition:str):
+        self._content = self._load(definition)
+    
+    def _load(self, definition:str):
         '''
-        definition of the schema for searching
+        loading of json data
         '''
-        self._text = text
+        try:
+            data = json.loads(definition)
+        except ValueError as e:
+            raise Exception('Unable to laod json data')
+        return data
